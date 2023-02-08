@@ -145,14 +145,14 @@ func _physics_process(delta):
 					Jump(JumpDivisor)
 					
 					if LeftCorrect:
-						TargetVelocityX = 1.0
+						TargetVelocityX = 0.77
 					if RightCorrect:
-						TargetVelocityX = -1.0
-					WallJumped = 0.6
+						TargetVelocityX = -0.77
+					WallJumped = 0.34
 					Controls.UpJustPress = 0.0
 
-	WallJumped = lerp(WallJumped, 0.0, delta * 3.0)
-	var IsWallJumping = WallJumped >= 0.01
+	WallJumped -= delta
+	var IsWallJumping = WallJumped > 0.0
 	
 	if Controls.LeftHold > 0.0 && !IsWallJumping:
 		TargetVelocityX -= 1.0
@@ -161,7 +161,7 @@ func _physics_process(delta):
 	TargetVelocityX = clamp(TargetVelocityX, -1.0, 1.0)
 	
 	if !IsWallJumping && !Controls.LeftHold > 0.0 && !Controls.RightHold > 0.0:
-		TargetVelocityX = 0.0
+		TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 14.0)
 	
 	VelocityX = lerp(VelocityX, TargetVelocityX * MoveSpeed, delta * AccelerationX)
 	
