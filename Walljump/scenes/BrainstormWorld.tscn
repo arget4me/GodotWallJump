@@ -10,33 +10,54 @@
 
 [node name="Block5" parent="Blocks" instance=ExtResource( 1 )]
 modulate = Color( 0.352941, 0.564706, 0.160784, 1 )
-position = Vector2( 193, 374 )
+position = Vector2( 193, 338 )
 scale = Vector2( 1.88, 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorForeground" parent="Blocks/Block5/ColorSprite" index="1"]
+margin_top = -18.5
+margin_bottom = 18.5
 
 [node name="Block6" parent="Blocks" instance=ExtResource( 1 )]
 modulate = Color( 0.352941, 0.564706, 0.160784, 1 )
-position = Vector2( 447, 255 )
+position = Vector2( 447, 245 )
 scale = Vector2( 1.88, 12.56 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Block3" parent="Blocks" instance=ExtResource( 1 )]
-modulate = Color( 0.376471, 0.423529, 0.603922, 1 )
-position = Vector2( 506, 635 )
-scale = Vector2( 27.543, 2.28 )
-
-[node name="Block4" parent="Blocks" instance=ExtResource( 1 )]
-modulate = Color( 0.376471, 0.423529, 0.603922, 1 )
-position = Vector2( 506, -0.999996 )
-scale = Vector2( 27.543, 2.28 )
+[node name="ColorForeground" parent="Blocks/Block6/ColorSprite" index="1"]
+margin_bottom = 19.0
 
 [node name="Block" parent="Blocks" instance=ExtResource( 1 )]
 modulate = Color( 0.443137, 0.545098, 0.545098, 1 )
-position = Vector2( 2, 293 )
-scale = Vector2( 2.36, 20.16 )
+position = Vector2( 16, 371 )
+scale = Vector2( 2.36, 13.3225 )
+
+[node name="ColorForeground" parent="Blocks/Block/ColorSprite" index="1"]
+margin_top = -19.0
 
 [node name="Block2" parent="Blocks" instance=ExtResource( 1 )]
 modulate = Color( 0.443137, 0.545098, 0.545098, 1 )
 position = Vector2( 1025, 293 )
 scale = Vector2( 2.36, 20.16 )
+
+[node name="Block4" parent="Blocks" instance=ExtResource( 1 )]
+modulate = Color( 0.443137, 0.545098, 0.545098, 1 )
+position = Vector2( -221, 293 )
+scale = Vector2( 2.36, 20.16 )
+
+[node name="Block3" parent="Blocks" instance=ExtResource( 1 )]
+modulate = Color( 0.376471, 0.423529, 0.603922, 1 )
+position = Vector2( 506, 646 )
+scale = Vector2( 1000, 3.42763 )
+
+[node name="Block7" parent="Blocks" instance=ExtResource( 1 )]
+modulate = Color( 0.376471, 0.423529, 0.603922, 1 )
+position = Vector2( 500, -45 )
+scale = Vector2( 1000, 3.42763 )
 
 [node name="WallJumpPlayer" parent="." instance=ExtResource( 2 )]
 position = Vector2( 591, 486 )
@@ -45,3 +66,7 @@ position = Vector2( 591, 486 )
 FollowTarget = NodePath("../WallJumpPlayer")
 YUpdateTreashold = 100.0
 XUpdateTreashold = 0.01
+
+[editable path="Blocks/Block5"]
+[editable path="Blocks/Block6"]
+[editable path="Blocks/Block"]

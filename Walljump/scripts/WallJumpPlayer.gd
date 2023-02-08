@@ -101,7 +101,7 @@ var MOVE_AND_SLIDE_MULTIPLIER = 100.0
 
 var VelocityX = 0.0
 var TargetVelocityX = 0.0
-var AccelerationX = 16.0
+var AccelerationX = 12.0
 
 var MoveSpeed = 5.3
 var JumpDivisor = 3.4
@@ -125,6 +125,13 @@ func get_which_wall_collided():
 			return "right"
 	return "none"
 
+func GetHitGround():
+	for i in range(get_slide_count()):
+		var collision = get_slide_collision(i)
+		if collision.normal.dot(Vector2.UP) >= 0.95:
+			return true
+	return false
+
 func _physics_process(delta):
 	Controls.Tick(delta)
 	
@@ -140,6 +147,7 @@ func _physics_process(delta):
 			
 			if LeftCorrect or RightCorrect:
 				CurrentGravity = Gravity.GetWallSlide()
+				Velocity.y = min(Velocity.y, 0.5)
 				
 				if Controls.UpJustPress > 0.0:
 					Jump(JumpDivisor)
@@ -161,7 +169,8 @@ func _physics_process(delta):
 	TargetVelocityX = clamp(TargetVelocityX, -1.0, 1.0)
 	
 	if !IsWallJumping && !Controls.LeftHold > 0.0 && !Controls.RightHold > 0.0:
-		TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 14.0)
+		TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 25.0)
+	
 	
 	VelocityX = lerp(VelocityX, TargetVelocityX * MoveSpeed, delta * AccelerationX)
 	
@@ -174,13 +183,19 @@ func _physics_process(delta):
 	
 	if CurrentState == PlayerStates.idle:
 		if !jumped && Controls.UpJustPress > 0.0:
-			Jump(JumpDivisor)
+			Jump(JumpDivisor - 0.3)
 			Controls.UpJustPress = 0.0
+		elif !GetHitGround():
+			CurrentState = PlayerStates.fall
+			
 
 	var preVelocityY = Velocity.y
 	Velocity = (move_and_slide(Velocity * MOVE_AND_SLIDE_MULTIPLIER, Vector2.UP) / MOVE_AND_SLIDE_MULTIPLIER)
 
-	if preVelocityY > 0.1 && Velocity.y <= 0.0 && Velocity.y > -0.01:
+	if GetHitGround(): #preVelocityY > 0.1 && Velocity.y <= 0.0 && Velocity.y > -0.01:
 		jumped = false
 		WallJumped = 0.0
 		CurrentState = PlayerStates.idle
+	
+	
+	print(CurrentState)
