@@ -147,7 +147,7 @@ func _physics_process(delta):
 			
 			if LeftCorrect or RightCorrect:
 				CurrentGravity = Gravity.GetWallSlide()
-				Velocity.y = min(Velocity.y, 0.5)
+				Velocity.y = lerp(Velocity.y, min(Velocity.y, 0.5), delta * 4.4)
 				
 				if Controls.UpJustPress > 0.0:
 					Jump(JumpDivisor)
