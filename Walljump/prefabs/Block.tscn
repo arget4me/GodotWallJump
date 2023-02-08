@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 20 )
+
+[node name="Block" type="StaticBody2D"]
+
+[node name="ColorSprite" type="Node2D" parent="."]
+
+[node name="ColorShadow" type="ColorRect" parent="ColorSprite"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+color = Color( 0.486275, 0.486275, 0.486275, 1 )
+
+[node name="ColorForeground" type="ColorRect" parent="ColorSprite"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -17.0
+margin_top = -17.0
+margin_right = 17.0
+margin_bottom = 17.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )

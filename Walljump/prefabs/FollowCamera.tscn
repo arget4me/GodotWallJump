@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="FollowCamera" type="Camera2D"]
+position = Vector2( 591, 486 )
+current = true
+smoothing_enabled = true

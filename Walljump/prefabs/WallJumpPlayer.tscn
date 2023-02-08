@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/WallJumpPlayer.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 18, 19 )
+
+[node name="WallJumpPlayer" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="ColorSprite" type="Node2D" parent="."]
+
+[node name="ColorShadow" type="ColorRect" parent="ColorSprite"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+color = Color( 0.219608, 0.223529, 0.305882, 1 )
+
+[node name="ColorBackground" type="ColorRect" parent="ColorSprite"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -18.0
+margin_top = -20.0
+margin_right = 16.0
+margin_bottom = 15.0
+color = Color( 0.239216, 0.368627, 0.486275, 1 )
+
+[node name="ColorForeground" type="ColorRect" parent="ColorSprite"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -17.0
+margin_right = 12.0
+margin_bottom = 6.0
+color = Color( 0.32549, 0.666667, 0.607843, 1 )
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
