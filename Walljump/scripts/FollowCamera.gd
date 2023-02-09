@@ -11,14 +11,27 @@ func _ready():
 	target = get_node(FollowTarget)
 
 
+var YFollowTime = 0.0
+var XFollowTime = 0.0
+
 func _physics_process(delta):
 	if target == null:
 		return
 	
-	if abs(position.x - target.position.x) >= XUpdateTreashold:
+	if YFollowTime >= 0.0:
+		YFollowTime -= delta
+	
+	if XFollowTime >= 0.0:
+		XFollowTime -= delta
+	
+	if abs(position.x - target.position.x) >= XUpdateTreashold or XFollowTime > 0.0:
 		position.x = target.position.x
-		
-	if abs(position.y - target.position.y) >= YUpdateTreashold:
+		if XFollowTime <= 0.0:
+			XFollowTime = 1.0
+	
+	if abs(position.y - target.position.y) >= YUpdateTreashold or YFollowTime > 0.0:
 		position.y = target.position.y
+		if YFollowTime <= 0.0:
+			YFollowTime = 1.0
 	
 	

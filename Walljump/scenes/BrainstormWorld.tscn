@@ -67,8 +67,8 @@ position = Vector2( 591, 486 )
 
 [node name="FollowCamera" parent="." instance=ExtResource( 3 )]
 FollowTarget = NodePath("../WallJumpPlayer")
-YUpdateTreashold = 100.0
-XUpdateTreashold = 0.01
+YUpdateTreashold = 150.0
+XUpdateTreashold = 50.0
 
 [node name="KinematicBody2D" type="RigidBody2D" parent="."]
 visible = false
