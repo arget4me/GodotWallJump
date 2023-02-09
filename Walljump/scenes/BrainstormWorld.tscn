@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://prefabs/Block.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/WallJumpPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://prefabs/FollowCamera.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 33.0151
 
 [node name="BrainstormWorld" type="Node2D"]
 
@@ -66,6 +69,86 @@ position = Vector2( 591, 486 )
 FollowTarget = NodePath("../WallJumpPlayer")
 YUpdateTreashold = 100.0
 XUpdateTreashold = 0.01
+
+[node name="KinematicBody2D" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( -91, 78 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="KinematicBody2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -33.0
+margin_top = -33.0
+margin_right = 33.0
+margin_bottom = 33.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+shape = SubResource( 1 )
+
+[node name="KinematicBody2D2" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( 237, 72 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="KinematicBody2D2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -33.0
+margin_top = -33.0
+margin_right = 33.0
+margin_bottom = 33.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D2"]
+shape = SubResource( 1 )
+
+[node name="KinematicBody2D3" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( 151, 72 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="KinematicBody2D3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -33.0
+margin_top = -33.0
+margin_right = 33.0
+margin_bottom = 33.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D3"]
+shape = SubResource( 1 )
+
+[node name="KinematicBody2D4" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2( 335, 81 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="KinematicBody2D4"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -33.0
+margin_top = -33.0
+margin_right = 33.0
+margin_bottom = 33.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D4"]
+shape = SubResource( 1 )
 
 [editable path="Blocks/Block5"]
 [editable path="Blocks/Block6"]

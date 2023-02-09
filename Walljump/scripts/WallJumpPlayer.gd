@@ -196,6 +196,3 @@ func _physics_process(delta):
 		jumped = false
 		WallJumped = 0.0
 		CurrentState = PlayerStates.idle
-	
-	
-	print(CurrentState)
