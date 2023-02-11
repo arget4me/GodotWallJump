@@ -101,7 +101,7 @@ var MOVE_AND_SLIDE_MULTIPLIER = 100.0
 
 var VelocityX = 0.0
 var TargetVelocityX = 0.0
-var AccelerationX = 12.0
+var AccelerationX = 10.0
 
 var MoveSpeed = 5.3
 var JumpDivisor = 3.4
@@ -190,19 +190,19 @@ func _physics_process(delta):
 	
 	var IsWallJumping = WallJumped > 0.0
 	
-	if Controls.LeftHold > 0.0 && !IsWallJumping:
+	if Input.is_action_pressed("ui_left") && !IsWallJumping:
 		TargetVelocityX = -1.0
-	if Controls.RightHold > 0.0 && !IsWallJumping:
+	if Input.is_action_pressed("ui_right") && !IsWallJumping:
 		TargetVelocityX = 1.0
 	TargetVelocityX = clamp(TargetVelocityX, -1.0, 1.0)
 	
-	if !IsWallJumping && !Controls.LeftHold > 0.0 && !Controls.RightHold > 0.0:
+	if !IsWallJumping && !Input.is_action_pressed("ui_left") && !Input.is_action_pressed("ui_right"):
 		if CurrentState != PlayerStates.idle:
-			TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 5)
+			TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 2)
 		else:
-			TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 25)
-	
-	VelocityX = lerp(VelocityX, TargetVelocityX * MoveSpeed, delta * AccelerationX)
+			TargetVelocityX = 0.0#lerp(TargetVelocityX, 0.0, delta * 25)
+	var MoveSpeedMultiplier = 1.2 if (CurrentState == PlayerStates.fall or CurrentState == PlayerStates.jump) else 1.0
+	VelocityX = lerp(VelocityX, TargetVelocityX * MoveSpeed * MoveSpeedMultiplier, delta * AccelerationX)
 	
 	
 	Velocity += CurrentGravity * delta
@@ -224,7 +224,8 @@ func _physics_process(delta):
 	var preVelocityY = Velocity.y
 	Velocity = (move_and_slide(Velocity * MOVE_AND_SLIDE_MULTIPLIER, Vector2.UP) / MOVE_AND_SLIDE_MULTIPLIER)
 
-	if GetHitGround():
+	if (CurrentState == PlayerStates.jump or CurrentState == PlayerStates.fall) and GetHitGround():
 		jumped = false
 		WallJumped = 0.0
 		CurrentState = PlayerStates.idle
+		VelocityX *= 0.5
