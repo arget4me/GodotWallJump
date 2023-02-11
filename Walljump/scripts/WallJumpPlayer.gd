@@ -1,5 +1,5 @@
 extends KinematicBody2D
-
+class_name Player
 
 func _ready():
 	
@@ -162,14 +162,14 @@ func _physics_process(delta):
 					VelocityX = TargetVelocityX * MoveSpeed * 0.3
 					
 					Jump(JumpDivisor + (0.0 if (LastWall != collided) else 2.0))
-					WallJumped = 0.13
+					WallJumped = 0.3
 					Controls.UpJustPress = 0.0
 					LastWall = collided
 				elif collided == "right" && Controls.LeftJustPress > 0.0:
 					TargetVelocityX = -0.77
 					VelocityX = TargetVelocityX * MoveSpeed * 0.3
 					Jump(JumpDivisor + (0.0 if (LastWall != collided) else 2.0))
-					WallJumped = 0.13
+					WallJumped = 0.3
 					Controls.UpJustPress = 0.0
 					LastWall = collided
 				
@@ -198,7 +198,7 @@ func _physics_process(delta):
 	
 	if !IsWallJumping && !Input.is_action_pressed("ui_left") && !Input.is_action_pressed("ui_right"):
 		if CurrentState != PlayerStates.idle:
-			TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 2)
+			TargetVelocityX = lerp(TargetVelocityX, 0.0, delta * 9)
 		else:
 			TargetVelocityX = 0.0#lerp(TargetVelocityX, 0.0, delta * 25)
 	var MoveSpeedMultiplier = 1.2 if (CurrentState == PlayerStates.fall or CurrentState == PlayerStates.jump) else 1.0
