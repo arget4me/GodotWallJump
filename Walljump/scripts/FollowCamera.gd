@@ -25,12 +25,12 @@ func _physics_process(delta):
 		XFollowTime -= delta
 	
 	if abs(position.x - target.position.x) >= XUpdateTreashold or XFollowTime > 0.0:
-		position.x = target.position.x
+		position.x = lerp(position.x, target.position.x, delta * 15.0)
 		if XFollowTime <= 0.0:
 			XFollowTime = 1.0
 	
 	if abs(position.y - target.position.y) >= YUpdateTreashold or YFollowTime > 0.0:
-		position.y = target.position.y
+		position.y = lerp(position.y, target.position.y, delta * 15.0)
 		if YFollowTime <= 0.0:
 			YFollowTime = 1.0
 	
